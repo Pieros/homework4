@@ -1,3 +1,5 @@
+/*ณัฐนันท์ ประพันธ์ศิริ 5310613194
+นัฐพร กำศิริพิมาน 5310611065 */
 html, body {
   margin: 0;
   padding: 0;
@@ -48,8 +50,8 @@ table#movies th, table#movies td {
   padding: 4px;
   text-align: left;
 }
-table#moviea th.hilite{
-background : yellow;
+table#movies th.hilite{
+background-color : yellow;
 }
 #notice #warning {
   background: rosybrown;

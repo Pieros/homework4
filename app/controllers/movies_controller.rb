@@ -13,9 +13,11 @@ class MoviesController < ApplicationController
     #แยก case ว่าจะแสดงผลเรียงตาม title หรือ release date
     case params[:sortby]||session[:sortby]
     when 'title'
-      ordering,@title = {:order => :title}, 'hilite'
+      ordering,@sort = {:order => :title}
+      @title = 'hilite'
     when 'release_date'
-      ordering,@date = {:order => :release_date}, 'hilite'
+      ordering,@sort = {:order => :release_date} 
+      @date ='hilite'
     end
     #นำ array ที่เก็บ rate ไว้มาเก็บไว้ที่ @all_ratings
     @all_ratings = Movie.all_ratings
