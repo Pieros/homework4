@@ -1,18 +1,24 @@
 -#  This file is app/views/movies/index.html.haml
+#ณัฐนันท์ ประพันธ์ศิริ 5310613194
+#นัฐพร กำศิริพิมาน 5310611065
+
 %h1 All Movies
 
 = form_tag movies_path, :method => :get do
   Include:
   - @all_ratings.each do |rating|
     = rating
+    #ทำให้ rate ทุกอันถูก check ในตอนแรกที่เข้ามา
     = check_box_tag "ratings[#{rating}]", 1, @selectrating.include?(rating), :id => "ratings_#{rating}"
   = submit_tag 'Refresh'
 
 %table#movies
   %thead
     %tr
-      %th{:class => @title}= link_to 'Movie Title', movies_path(:sortby => 'title', :ratings => @select_ating)
+    #กำหนด parameter ที่จะใช้ในการแสดงผลเมื่อต้องการเรียงตาม title และ rating
+      %th{:class => @title}= link_to 'Movie Title', movies_path(:sortby => 'title', :ratings => @selectrating)
       %th Rating
+      #กำหนก parameter ที่จะใช้ในการแสดงผลเมื่อต้องการให้แสดงตาม release date และ rating
       %th{:class => @date}= link_to 'Release Date', movies_path(:sortby => 'release_date', :ratings => @selectrating)
       %th More Info
   %tbody
