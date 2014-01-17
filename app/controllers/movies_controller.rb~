@@ -1,0 +1,48 @@
+class MoviesController < ApplicationController
+
+  def show
+    id = params[:id] # retrieve movie ID from URI route
+    @movie = Movie.find(id) # look up movie by unique ID
+    # will render app/views/movies/show.<extension> by default
+  end
+
+  def index
+    case params[:sortby]||session[:sortby]
+    when 'title'
+      ordering,@title = {:order => :title}, 'hilite'
+    when 'release_date'
+      ordering,@date = {:order => :release_date}, 'hilite'
+    end
+    @all_ratings = Movie.all_ratings
+    @selectrating = params[:ratings]||session[:ratings]||{}
+    
+    if @selectrating == {}
+      @selectrating = Hash[@all_rating.map {|rating| [rating, rating]}]
+    end
+      if params[:sortby] != session[:sortby] || params[:ratings] != 	  	session[:ratings]
+      	session[:sortby] = params[:sortby]||session[:sortby]
+      	session[:ratings] = @selectrating
+      	redirect_to :sortby => params[:sortby]||session[:sortby], :ratings => @selectrating 
+      end
+    @movies = Movie.find_all_by_rating(@selectrating.keys, ordering)
+  end
+
+  def edit
+    @movie = Movie.find params[:id]
+  end
+
+  def update
+    @movie = Movie.find params[:id]
+    @movie.update_attributes!(params[:movie])
+    flash[:notice] = "#{@movie.title} was successfully updated."
+    redirect_to movie_path(@movie)
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    flash[:notice] = "Movie '#{@movie.title}' deleted."
+    redirect_to movies_path
+  end
+
+end
