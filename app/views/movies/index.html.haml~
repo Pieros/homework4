@@ -15,7 +15,7 @@
 %table#movies
   %thead
     %tr
-      %th{:class => th.hilite}= link_to 'Movie Title', movies_path(:sortby => 'title', :ratings => @selectrating)
+      %th{:class => @title}= link_to 'Movie Title', movies_path(:sortby => 'title', :ratings => @selectrating)
       %th Rating
       %th{:class => @date}= link_to 'Release Date', movies_path(:sortby => 'release_date', :ratings => @selectrating)
       %th More Info
@@ -28,3 +28,4 @@
         %td= link_to "More about #{movie.title}", movie_path(movie)
 
 = link_to 'Add new movie', new_movie_path
+%br= raw(@movies[0].keys)

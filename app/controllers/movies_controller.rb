@@ -23,6 +23,9 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     #เก็บ parameter rating ที่ user ได้เลือกไว้
     @selectrating = params[:ratings]||session[:ratings]||{}
+	if @selectrating == {}
+		@selectrating = Hash[@all_ratings.map {|rate| [rate, rate]}]
+end
     #ถ้าค่าที่รับเข้ามาจาก user กับค่าที่เก็บไว้ใน session ไม่ตรงกันให้เปลี่ยนค่า session เป็นค่าที่รับมาใหม่
       if params[:sortby] != session[:sortby] || params[:ratings] != session[:ratings]
       	session[:sortby] = params[:sortby]||session[:sortby]
