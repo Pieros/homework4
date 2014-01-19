@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     #เก็บ parameter rating ที่ user ได้เลือกไว้
     @selectrating = params[:ratings]||session[:ratings]||{}
+    #ถ้า @selectrating =={} หมายถึงการเข้าเว็บครั้งแรก ทำการ map rateเข้ากับตัวมันเอง
 	if @selectrating == {}
 		@selectrating = Hash[@all_ratings.map {|rate| [rate, rate]}]
 end
