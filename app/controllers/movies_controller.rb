@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     @selectrating = params[:ratings]||session[:ratings]||{}
     #ถ้า @selectrating =={} หมายถึงการเข้าเว็บครั้งแรก ทำการ map rateเข้ากับตัวมันเอง
 	if @selectrating == {}
-		@selectrating = Hash[@all_ratings.map {|rate| [rate, rate]}]
+		@selectrating = Hash[@all_ratings.map {|rate| [rate, 1]}]
 end
     #ถ้าค่าที่รับเข้ามาจาก user กับค่าที่เก็บไว้ใน session ไม่ตรงกันให้เปลี่ยนค่า session เป็นค่าที่รับมาใหม่
       if params[:sortby] != session[:sortby] || params[:ratings] != session[:ratings]
